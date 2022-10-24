@@ -1,29 +1,13 @@
 import React from "react";
 import { Container } from "@mui/system";
-import {
-	AppBar,
-	BottomNavigation,
-	Button,
-	Card,
-	CardActions,
-	CardContent,
-	CardMedia,
-	createTheme,
-	Grid,
-	Link,
-	responsiveFontSizes,
-	ThemeProvider,
-	Toolbar,
-	Typography
-} from "@mui/material";
+import { AppBar, BottomNavigation, createTheme, Grid, Link, responsiveFontSizes, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import ImageList from "./ImageList";
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
 function App() {
-	const arr = ["asdasd1", "asfafs2", "asdasd1", "asfafs2", "asdasd1", "asfafs2", "asdasd1", "asfafs2"];
-
 	return (
 		<>
 			<AppBar position="sticky" color="default">
@@ -58,27 +42,7 @@ function App() {
 					</Grid>
 				</Grid>
 				<Grid container justifyContent="center" alignItems="center" spacing={12} mb={"5%"}>
-					{arr.map((item) => (
-						<Grid item>
-							<Card sx={{ minWidth: 300 }}>
-								<CardMedia
-									component="img"
-									alt="green iguana"
-									height="300"
-									src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.peerspace.com%2Fresources%2Fphotography-awesome-hobby%2F&psig=AOvVaw3Swbb4GBKXpyF-gLA_fYjz&ust=1666628442376000&source=images&cd=vfe&ved=0CA0QjRxqFwoTCLjz-_Pg9voCFQAAAAAdAAAAABAJ"
-								/>
-								<CardContent>
-									<Typography gutterBottom variant="h6" component="div">
-										BackgroundLab-{item}
-									</Typography>
-								</CardContent>
-								<CardActions>
-									<Button size="small">Share</Button>
-									<Button size="small">Download</Button>
-								</CardActions>
-							</Card>
-						</Grid>
-					))}
+					<ImageList />
 				</Grid>
 			</Container>
 			<BottomNavigation
@@ -89,7 +53,14 @@ function App() {
 					boxShadow: "0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);"
 				}}
 			>
-				<BottomNavigationAction sx={{ fontWeight: "500" }} label="🔗Join my Telegram Channel" value="recents" />
+				<BottomNavigationAction
+					sx={{ fontWeight: "600" }}
+					label="🔗Join my Telegram Channel"
+					value="recents"
+					onClick={() => {
+						window.location.href = "https://t.me/backgroundlab";
+					}}
+				/>
 			</BottomNavigation>
 		</>
 	);
