@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Grid, LinearProgress, Typography } from "@mui/material";
+import { Alert, Box, Button, Card, CardActions, CardContent, CardMedia, Grid, LinearProgress, Snackbar, Typography } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadIcon from "@mui/icons-material/Download";
 import { ref, getDownloadURL, listAll } from "firebase/storage";
@@ -10,6 +10,7 @@ function ImageList() {
 	const [state, setState] = useState<any>([]);
 	// const [imageSources, setImageSources] = useState<any>([]);
 	const [dataLoaded, setDataLoaded] = useState<boolean>(false);
+	const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		async function fetchAllImages(): Promise<any> {
@@ -37,24 +38,58 @@ function ImageList() {
 		<>
 			{dataLoaded === true ? (
 				state.map((item: any, idx: string | number) => (
-					<Grid item key={idx}>
-						<Card sx={{ minWidth: 300 }}>
-							<CardMedia component="img" alt={"BackgroundLab-"} height="300" image={item} />
-							<CardContent>
-								<Typography gutterBottom variant="h6" component="div">
-									BackgroundLab-{idx}
-								</Typography>
-							</CardContent>
-							<CardActions>
-								<Button size="small" variant="outlined" endIcon={<ContentCopyIcon />}>
-									Share
-								</Button>
-								<Button size="small" variant="contained" endIcon={<DownloadIcon />}>
-									Download
-								</Button>
-							</CardActions>
-						</Card>
-					</Grid>
+					<>
+						<Grid item key={idx}>
+							<Card sx={{ minWidth: 300 }}>
+								<CardMedia sx={{ minHeight: 300 }} component="img" alt={"BackgroundLab-"} height="400" image={item} />
+								<CardContent>
+									<Typography gutterBottom variant="h6" component="div">
+										BackgroundLab-{idx}
+									</Typography>
+								</CardContent>
+								<CardActions>
+									<Button
+										size="small"
+										variant="outlined"
+										endIcon={<ContentCopyIcon />}
+										onClick={() => {
+											setSnackbarOpen(true);
+											navigator.clipboard.writeText(item);
+										}}
+									>
+										Share
+									</Button>
+									<Button
+										size="small"
+										variant="contained"
+										endIcon={<DownloadIcon />}
+										onClick={() => {
+											window.location.href = item;
+										}}
+									>
+										Download
+									</Button>
+								</CardActions>
+							</Card>
+						</Grid>
+						{/* <Snackbar
+							open={snackbarOpen}
+							autoHideDuration={3000}
+							onClose={() => setSnackbarOpen(false)}
+							message="Link copied"
+							anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+						/> */}
+						<Snackbar
+							open={snackbarOpen}
+							autoHideDuration={3000}
+							onClose={() => setSnackbarOpen(false)}
+							anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+						>
+							<Alert onClose={() => setSnackbarOpen(false)} severity="success" sx={{ width: "100%" }}>
+								Link copied to clipboard!
+							</Alert>
+						</Snackbar>
+					</>
 				))
 			) : (
 				<Grid item sx={{ width: "100%" }}>
