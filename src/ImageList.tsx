@@ -3,7 +3,7 @@ import { Alert, Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Li
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadIcon from "@mui/icons-material/Download";
 import { ref, getDownloadURL, listAll } from "firebase/storage";
-import { storage } from "./firebaseStorage";
+import { storage } from "./firebaseStorage.config";
 
 function ImageList() {
 	const arr = ["asdasd1", "asfafs2", "asdasd1", "asfafs2", "asdasd1", "asfafs2", "asdasd1", "asfafs2"];
