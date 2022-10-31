@@ -1,9 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Box, Button, Card, CardActions, CardContent, CardMedia, Grid, LinearProgress, Snackbar, Typography } from "@mui/material";
+import {
+	Alert,
+	Box,
+	Button,
+	Card,
+	CardActions,
+	CardContent,
+	CardMedia,
+	createTheme,
+	Grid,
+	LinearProgress,
+	Snackbar,
+	ThemeProvider,
+	Typography
+} from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadIcon from "@mui/icons-material/Download";
 import { ref, getDownloadURL, listAll } from "firebase/storage";
 import { storage } from "./firebaseStorage.config";
+
+const theme = createTheme({
+	palette: {
+		primary: {
+			main: "#2c3e50",
+			contrastText: "#fff"
+		},
+		secondary: {
+			main: "#bdc3c7",
+			contrastText: "#fff"
+		}
+	}
+});
 
 function ImageList() {
 	const arr = ["asdasd1", "asfafs2", "asdasd1", "asfafs2", "asdasd1", "asfafs2", "asdasd1", "asfafs2"];
@@ -43,32 +70,36 @@ function ImageList() {
 							<Card sx={{ minWidth: 300 }}>
 								<CardMedia sx={{ minHeight: 300 }} component="img" alt={"BackgroundLab-"} height="400" image={item} />
 								<CardContent>
-									<Typography gutterBottom variant="h6" component="div">
+									<Typography gutterBottom variant="h6" component="div" sx={{ color: "#2c3e50" }}>
 										BackgroundLab-{idx}
 									</Typography>
 								</CardContent>
 								<CardActions>
-									<Button
-										size="small"
-										variant="outlined"
-										endIcon={<ContentCopyIcon />}
-										onClick={() => {
-											setSnackbarOpen(true);
-											navigator.clipboard.writeText(item);
-										}}
-									>
-										Share
-									</Button>
-									<Button
-										size="small"
-										variant="contained"
-										endIcon={<DownloadIcon />}
-										onClick={() => {
-											window.location.href = item;
-										}}
-									>
-										Download
-									</Button>
+									<ThemeProvider theme={theme}>
+										<Button
+											size="small"
+											variant="contained"
+											color="secondary"
+											endIcon={<ContentCopyIcon />}
+											onClick={() => {
+												setSnackbarOpen(true);
+												navigator.clipboard.writeText(item);
+											}}
+										>
+											Share
+										</Button>
+										<Button
+											size="small"
+											variant="contained"
+											color="primary"
+											endIcon={<DownloadIcon />}
+											onClick={() => {
+												window.location.href = item;
+											}}
+										>
+											Download
+										</Button>
+									</ThemeProvider>
 								</CardActions>
 							</Card>
 						</Grid>

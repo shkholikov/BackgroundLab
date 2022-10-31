@@ -10,8 +10,8 @@ theme = responsiveFontSizes(theme);
 function App() {
 	return (
 		<>
-			<AppBar position="sticky" color="default">
-				<Container>
+			<Container sx={{ position: "sticky", top: 10, bottom: 10, zIndex: "9999" }}>
+				<AppBar position="sticky" sx={{ borderRadius: "50px", backgroundColor: "#f5f5f5", background: "linear-gradient(to left, #bdc3c7, #2c3e50)" }}>
 					<Toolbar sx={{ flexDirection: { xs: "column", md: "row" } }}>
 						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
 							BackgroundLab📱
@@ -23,19 +23,19 @@ function App() {
 							</Link>
 						</Typography>
 					</Toolbar>
-				</Container>
-			</AppBar>
+				</AppBar>
+			</Container>
 			<Container>
 				<Grid container justifyContent="center" alignItems="center">
 					<Grid item my={"3%"}>
 						<ThemeProvider theme={theme}>
-							<Typography variant="h4" align="center" sx={{ fontWeight: "600" }}>
+							<Typography variant="h4" align="center" sx={{ fontWeight: "600", color: "#2c3e50" }}>
 								Welcome to the BackgroundLab📱
 							</Typography>
-							<Typography variant="h5" align="center">
+							<Typography variant="h5" align="center" sx={{ fontWeight: "600", color: "#2c3e50" }}>
 								Do what makes you happy🎗
 							</Typography>
-							<Typography variant="body1" align="center">
+							<Typography variant="body1" align="center" sx={{ fontWeight: "600", color: "#2c3e50" }}>
 								BackgroundLab📱 is the place where I can share all my photos. Feel free to visit and download/share/like🖤
 							</Typography>
 						</ThemeProvider>
@@ -48,14 +48,14 @@ function App() {
 			<BottomNavigation
 				showLabels
 				sx={{
-					backgroundColor: "#f5f5f5",
+					background: "linear-gradient(to left, #bdc3c7, #2c3e50)",
 					color: "rgba(0, 0, 0, 0.87)",
 					boxShadow: "0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);"
 				}}
 			>
 				<BottomNavigationAction
-					sx={{ fontWeight: "600" }}
-					label="🔗Join my Telegram Channel"
+					sx={{ fontWeight: "600", color: "#ffffff" }}
+					label="🔗 Join my Telegram Channel"
 					value="recents"
 					onClick={() => {
 						window.location.href = "https://t.me/backgroundlab";
