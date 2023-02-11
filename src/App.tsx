@@ -21,7 +21,7 @@ function App() {
 						</Typography>
 						<Typography variant="overline">
 							👋🏻 Say Hi 🧑🏻‍💻{" "}
-							<Link href="https://t.me/backgroundlab">
+							<Link href="https://t.me/backgroundlab" underline="hover" color="inherit">
 								<b>Shakhzod Kholikov</b>
 							</Link>
 						</Typography>
